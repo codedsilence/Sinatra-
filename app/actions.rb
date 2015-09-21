@@ -4,8 +4,18 @@ get '/' do
 end
 
 get '/messages' do
-	@messages = Message.all
+  @messages = Message.all
   erb :'messages/index'
+end
+
+get '/messages/new' do
+  @message = Message.new
+  erb :'messages/new'
+end
+
+get '/messages/:id' do
+  @message = Message.find params[:id]
+  erb :'messages/show'
 end
 
 post '/messages' do
@@ -19,15 +29,4 @@ post '/messages' do
   else
     erb :'messages/new'
   end
-end
-
-
-
-get '/messages/new' do
-  erb :"messages/new"
-end
-
-get '/messages/:id' do
-  @message = Message.find params[:id]
-  erb :'messages/show'
 end
